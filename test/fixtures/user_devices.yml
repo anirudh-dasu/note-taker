@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: user_devices
+#
+#  id          :integer          not null, primary key
+#  provider    :string
+#  uid         :string
+#  device_id   :string
+#  device_type :string
+#  jwt         :string
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provider: MyString
+  uid: MyString
+  device_id: MyString
+  device_type: MyString
+  jwt: MyString
+  user: one
+
+two:
+  provider: MyString
+  uid: MyString
+  device_id: MyString
+  device_type: MyString
+  jwt: MyString
+  user: two
