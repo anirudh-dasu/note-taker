@@ -13,20 +13,8 @@
 #  updated_at  :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+require 'rails_helper'
 
-one:
-  provider: MyString
-  uid: MyString
-  device_id: MyString
-  device_type: MyString
-  jwt: MyString
-  user: one
-
-two:
-  provider: MyString
-  uid: MyString
-  device_id: MyString
-  device_type: MyString
-  jwt: MyString
-  user: two
+RSpec.describe UserDevice, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
+end

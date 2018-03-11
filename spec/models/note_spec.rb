@@ -13,20 +13,8 @@
 #  updated_at :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+require 'rails_helper'
 
-one:
-  title: MyString
-  content: MyText
-  url: MyString
-  user: one
-  kind: MyString
-  slug: MyString
-
-two:
-  title: MyString
-  content: MyText
-  url: MyString
-  user: two
-  kind: MyString
-  slug: MyString
+RSpec.describe Note, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
+end

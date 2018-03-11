@@ -10,9 +10,18 @@
 #  updated_at      :datetime         not null
 #
 
-class User < ApplicationRecord
-  has_secure_password
-  has_many :user_devices
-  has_many :notes
-  has_and_belongs_to_many :tags
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+
+  before(:all) do
+    @user = create(:user)
+  end
+
+  it "has a valid factory" do
+    expect(@user).to be_valid
+  end
+
+  it ""
+
 end

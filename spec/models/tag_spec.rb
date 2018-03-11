@@ -9,12 +9,8 @@
 #  updated_at :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+require 'rails_helper'
 
-one:
-  title: MyString
-  slug: MyString
-
-two:
-  title: MyString
-  slug: MyString
+RSpec.describe Tag, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
