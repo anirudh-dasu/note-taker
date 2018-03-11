@@ -15,6 +15,8 @@ gem 'unicorn-rails'
 
 # Use graphql instead of rest
 gem 'graphql'
+gem 'graphql-batch'
+gem 'graphql-formatter'
 
 # For user model
 gem 'bcrypt'

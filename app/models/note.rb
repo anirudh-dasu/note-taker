@@ -16,4 +16,5 @@
 class Note < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :tags
+  alias_attribute :author, :user
 end

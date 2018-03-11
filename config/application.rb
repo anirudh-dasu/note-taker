@@ -29,5 +29,14 @@ module Notetaker
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    config.autoload_paths << Rails.root.join('app/graph/')
+    config.autoload_paths << Rails.root.join('app/graph/utils/')
+    config.autoload_paths << Rails.root.join('app/graph/mutations/')
+    config.autoload_paths << Rails.root.join('app/graph/types/')
+
+    # config.eager_load_paths << Rails.root.join('app/graph/')
+    # config.eager_load_paths << Rails.root.join('app/graph/utils/')
+    # config.eager_load_paths << Rails.root.join('app/graph/mutations/')
+    # config.eager_load_paths << Rails.root.join('app/graph/types/')
   end
 end
