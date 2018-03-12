@@ -4,5 +4,5 @@ NotetakerSchema = GraphQL::Schema.define do
   query Types::QueryType
 
   instrument :query, Utils::ConcurrentBatchSetup
-  lazy_resolve GraphQL::Batch::Promise, :sync
+  # lazy_resolve GraphQL::Batch::Promise, :sync
 end

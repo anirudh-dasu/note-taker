@@ -1,6 +1,6 @@
 Types::UserDeviceType = GraphQL::ObjectType.define do
-  name "UserDevice"
-  description "Each device belonging to a user"
+  name 'UserDevice'
+  description 'Each device belonging to a user'
   field :id, !types.ID
   field :provider, types.String
   field :uid, types.String
@@ -10,8 +10,8 @@ Types::UserDeviceType = GraphQL::ObjectType.define do
   field :created_at, types.String
   field :updated_at, types.String
 
-  field :user, Types::UserType, "Owner of this device" do
-    resolve ->(user_device, args, ctx) {
+  field :user, Types::UserType, 'Owner of this device' do
+    resolve lambda { |user_device, _args, _ctx|
       Utils::RecordLoader.for(User).load(user_device.user_id)
     }
   end

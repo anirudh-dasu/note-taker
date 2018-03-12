@@ -13,15 +13,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   before(:all) do
     @user = create(:user)
   end
 
-  it "has a valid factory" do
+  it 'has a valid factory' do
     expect(@user).to be_valid
   end
 
-  it ""
-
+  it { should validate_uniqueness_of(:email) }
+  it { should validate_presence_of(:email) }
+  it { should validate_uniqueness_of(:username) }
+  it { should have_many(:user_devices) }
 end
