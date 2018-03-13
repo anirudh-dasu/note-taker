@@ -6,7 +6,7 @@ class FieldError
     @message = message
   end
 
-  def self.error(msg)
-    { messages: [FieldError.new('base', msg)] }
+  def self.error(base = 'base', msg)
+    { message: [FieldError.new(base, msg)] }
   end
 end

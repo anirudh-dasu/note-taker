@@ -2,10 +2,10 @@ require 'jwt'
 module Authorizable
   def authorize
     token = check_for_token
-    no_token_present && return if token.nil?
+    return if token.nil?
+    invalid_token_present && return unless token_valid?(token)
     begin
       decoded_token = decode_token(token)
-      invalid_token_present && return unless token_valid?(decoded_token)
       find_and_set_user(decoded_token)
     rescue StandardError => e
       Rails.logger.error e
@@ -26,8 +26,9 @@ module Authorizable
     token
   end
 
-  def token_valid?(decoded_token)
-    User.find(decoded_token['id']).encrypted_password == decoded_token['digest']
+  def token_valid?(token)
+    logged_out_tokens = Marshall.load(Rails.cache.read('blacklisted_tokens'))
+    !logged_out_tokens.include?(token)
   end
 
   def token_present?(token)
@@ -39,14 +40,15 @@ module Authorizable
   end
 
   def no_token_present
-    render json: FieldError.error('Json Web token is not present'), status: :unauthorized
+    render json: FieldError.error(nil, 'Json Web token is not present'), status: :unauthorized
   end
 
   def invalid_token_present
-    render json: FieldError.error('Json Web token is not valid'), status: :unauthorized
+    render json: FieldError.error(nil, 'Json Web token is not valid'), status: :unauthorized
   end
 
   def find_and_set_user(decoded_token)
-    @current_user = User.find(decoded_token)
+    @current_user = User.find(decoded_token.first['id'])
+    @current_user_device = UserDevice.find(decoded_token.first['user_device_id'])
   end
 end

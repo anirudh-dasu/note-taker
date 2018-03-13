@@ -24,6 +24,7 @@ class GraphqlController < ApplicationController
     query_variables = ensure_hash(variables)
     context = {
       current_user: @current_user,
+      current_device: @current_device,
       request: request
     }
     result = NotetakerSchema.execute(query, variables: query_variables, context: context,
@@ -35,13 +36,13 @@ class GraphqlController < ApplicationController
   def multiplex(queries_params)
     Rails.logger.info 'Executing multiple queries'
     queries_params.each { |query| Rails.logger.info GraphQLFormatter.new(query[:query]) }
-
     queries = queries_params.map do |query|
       {
         query: query[:query],
         variables: ensure_hash(query[:variables]),
         context: {
           current_user: @current_user,
+          current_device: @current_device,
           request: request
         },
         operation_name: query[:operationName]

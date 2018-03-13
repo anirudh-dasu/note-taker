@@ -1,3 +1,87 @@
 inherit_from: .rubocop_todo.yml
 AllCops:
   DisplayCopNames: true
+
+Layout/EmptyLines:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+
+
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+    - 'app/graphql/types/*.rb'
+    - 'app/graphql/mutations/*.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+  Max: 20
+
+Style/Documentation:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+
+Style/MixinUsage:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+
+Style/StringLiterals:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+
+Metrics/LineLength:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'bin/*'
+    - 'config/*.rb'
+    - 'config/environments/*.rb'
+    - 'config/initializers/*.rb'
+    - Gemfile
+  Max: 100
+
+Style/NumericLiterals:
+  Exclude:
+    - 'db/*.rb'
+    - 'db/migrate/*.rb'
+    - 'config/*.rb'
+    - Gemfile
