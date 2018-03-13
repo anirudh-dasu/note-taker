@@ -18,7 +18,6 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :email
   validates_uniqueness_of :username
-  validates_presence_of :email
 
   scope :with_token, ->(token) { joins(:user_devices).where(user_devices: { jwt: token }) }
 end

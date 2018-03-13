@@ -2,7 +2,7 @@ require 'jwt'
 module Authorizable
   def authorize
     token = check_for_token
-    no_token_present if token.nil?
+    no_token_present && return if token.nil?
     begin
       decoded_token = decode_token(token)
       invalid_token_present && return unless token_valid?(decoded_token)
