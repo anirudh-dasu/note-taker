@@ -16,8 +16,8 @@ class User < ApplicationRecord
   has_many :notes
   has_and_belongs_to_many :tags
 
-  validates_uniqueness_of :email
-  validates_uniqueness_of :username
+  validates :email, presence: true, uniqueness: true
+  validates :username, uniqueness: true
 
   scope :with_token, ->(token) { joins(:user_devices).where(user_devices: { jwt: token }) }
 

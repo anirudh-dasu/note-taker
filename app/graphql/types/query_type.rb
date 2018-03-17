@@ -7,8 +7,8 @@ Types::QueryType = GraphQL::ObjectType.define do
     description 'Fetch paginated notes collection of the current user'
     type types[Types::NoteType]
     argument :offset, types.Int, default_value: 0
-    argument :tag, types.String, default_value: nil
-    argument :keyword, types.String, default_value: nil
+    argument :tag, types.String, default_value: ''
+    argument :keyword, types.String, default_value: ''
     resolve(Utils::Auth.protect(lambda { |_obj, args, ctx|
                                   user = ctx[:current_user]
                                   user.notes.latest.tag_slug(args[:tag]).paginate(args[:offset])

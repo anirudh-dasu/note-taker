@@ -8,7 +8,7 @@ module Authorizable
       decoded_token = decode_token(token)
       find_and_set_user(decoded_token)
     rescue StandardError => e
-      Rails.logger.error e
+      Rails.logger.error "Authorization failed with #{e}"
       invalid_token_present
     end
   end
@@ -27,7 +27,9 @@ module Authorizable
   end
 
   def token_valid?(token)
-    logged_out_tokens = Marshall.load(Rails.cache.read('blacklisted_tokens'))
+    blacklisted_tokens = Rails.cache.read('blacklisted_tokens')
+    return true if blacklisted_tokens.nil?
+    logged_out_tokens = Marshal.load(blacklisted_tokens)
     !logged_out_tokens.include?(token)
   end
 
