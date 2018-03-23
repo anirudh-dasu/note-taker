@@ -34,6 +34,13 @@ module Notetaker
     config.autoload_paths << Rails.root.join('app/graph/mutations/')
     config.autoload_paths << Rails.root.join('app/graph/types/')
 
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
     # config.eager_load_paths << Rails.root.join('app/graph/')
     # config.eager_load_paths << Rails.root.join('app/graph/utils/')
     # config.eager_load_paths << Rails.root.join('app/graph/mutations/')

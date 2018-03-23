@@ -26,8 +26,8 @@ Types::UserType = GraphQL::ObjectType.define do
   field :user_devices do
     type types[Types::UserDeviceType]
     description 'All user_devices association with this user.'
-    resolve lambda { |user, _args, _ctx|
-      user.user_devices
+    resolve lambda { |user, _args, ctx|
+      ctx[:current_device] ? user.user_devices.where(id: ctx[:current_device].id) : []
     }
   end
 end
