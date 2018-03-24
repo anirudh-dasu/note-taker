@@ -4,8 +4,8 @@ Types::TagType = GraphQL::ObjectType.define do
   field :id, !types.ID
   field :title, types.String
   field :slug, types.String
-  field :created_at, types.String
-  field :updated_at, types.String
+  field :createdAt, types.String
+  field :updatedAt, types.String
 
   field :notes do
     type types[Types::NoteType]

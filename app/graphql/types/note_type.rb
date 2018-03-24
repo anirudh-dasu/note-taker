@@ -7,8 +7,8 @@ Types::NoteType = GraphQL::ObjectType.define do
   field :url, types.String
   field :kind, types.String
   field :slug, types.String
-  field :created_at, types.String
-  field :updated_at, types.String
+  field :createdAt, types.String
+  field :updatedAt, types.String
 
   field :author, Types::UserType, 'Author of this note' do
     resolve lambda { |note, _args, _ctx|

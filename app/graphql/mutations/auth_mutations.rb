@@ -7,7 +7,7 @@ module Mutations
       input_field :sign_in, InputTypes::UserInputTypes::SignIn
 
       return_field :user, Types::UserType
-      return_field :user_device, Types::UserDeviceType
+      return_field :userDevice, Types::UserDeviceType
       return_field :messages, types[Types::FieldErrorType]
 
       resolve lambda { |_obj, inputs, _ctx|
@@ -17,7 +17,7 @@ module Mutations
           user_device = user.user_devices.find_or_create_by(inputs.to_h.symbolize_keys
                         .slice(:uid, :provider, :device_id, :device_type))
           user_device.generate_jwt_token!
-          { user: user, user_device: user_device }
+          { user: user, userDevice: user_device }
         elsif user.nil?
           FieldError.error('user', 'Email not present. Please sign up first')
         else

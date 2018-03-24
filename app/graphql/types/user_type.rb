@@ -3,8 +3,8 @@ Types::UserType = GraphQL::ObjectType.define do
   description 'A user who can create notes and tags'
   field :id, !types.ID
   field :email, types.String
-  field :created_at, types.String
-  field :updated_at, types.String
+  field :createdAt, types.String
+  field :updatedAt, types.String
   field :username, types.String
 
   field :notes do
@@ -23,11 +23,11 @@ Types::UserType = GraphQL::ObjectType.define do
     }
   end
 
-  field :user_devices do
+  field :userDevices do
     type types[Types::UserDeviceType]
     description 'All user_devices association with this user.'
     resolve lambda { |user, _args, ctx|
-      ctx[:current_device] ? user.user_devices.where(id: ctx[:current_device].id) : []
+      user.user_devices.where(id: ctx[:current_device].id)
     }
   end
 end

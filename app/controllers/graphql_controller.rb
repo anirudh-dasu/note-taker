@@ -24,7 +24,7 @@ class GraphqlController < ApplicationController
     query_variables = ensure_hash(variables)
     context = {
       current_user: @current_user,
-      current_device: @current_device,
+      current_device: @current_user_device,
       request: request
     }
     result = NotetakerSchema.execute(query, variables: query_variables, context: context,
@@ -42,7 +42,7 @@ class GraphqlController < ApplicationController
         variables: ensure_hash(query[:variables]),
         context: {
           current_user: @current_user,
-          current_device: @current_device,
+          current_device: @current_user_device,
           request: request
         },
         operation_name: query[:operationName]
