@@ -7,6 +7,7 @@ module Mutations
       input_field :sign_up, InputTypes::UserInputTypes::SignUp
 
       return_field :user, Types::UserType
+      return_field :userDevice, Types::UserDeviceType
       return_field :messages, types[Types::FieldErrorType]
 
       resolve lambda { |_obj, inputs, _ctx|
@@ -17,7 +18,7 @@ module Mutations
         if user.save && user_device.save
           user_device.update(user: user)
           user_device.generate_jwt_token!
-          { user: user }
+          { user: user, userDevice: user_device }
         else
           { messages: user.fields_errors + user_device.fields_errors }
         end
