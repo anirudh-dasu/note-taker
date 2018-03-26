@@ -6,22 +6,36 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password', username: 'admin')
-Note.create(title: 'First note', kind: 'testing', content: 'Example content', url: nil, user_id: User.first.id)
-Note.create(title: 'Second note', kind: 'testing', content: 'Example content #2', url: 'http://www.google.com', user_id: User.first.id)
-tag_one = Tag.create(title: 'First tag')
-tag_one.users << User.first
-tag_one.notes << Note.first
-tag_one.save
-tag_two = Tag.create(title: 'Second tag')
-tag_two.users << User.first
-tag_two.notes << Note.first
-tag_two.save
-tag_three = Tag.create(title: 'Third tag')
-tag_three.users << User.first
-tag_three.notes << Note.last
-tag_three.save
-tag_four = Tag.create(title: 'Fourth tag')
-tag_four.users << User.first
-tag_four.notes << Note.last
-tag_four.save
+[User, UserDevice, Note, Tag].each(&:delete_all)
+
+User.populate(100) do |user|
+	user.email = Faker::Internet.email
+	user.username = Faker::Name.name
+	user.password_digest = User.new(password: 'password').password_digest
+
+  Note.populate(10) do |note|
+    note.title =  Faker::Movie.quote
+    note.content = Populator.sentences(5)
+    note.kind = Faker::Color.color_name
+
+		Tag.populate(10) do |tag|
+			tag.title = Faker::LordOfTheRings.character
+		end
+	end
+
+end
+
+User.all.each do |user|
+  device = UserDevice.create(device_type:'chrome', device_id: UUID.new.generate, user_id: user.id)
+  device.generate_jwt_token!
+  device.save
+end
+
+Note.all.each do |note|
+	note.user_id = User.order("RANDOM()").first.id
+	note.save
+	tags = Tag.order("RANDOM()").limit(5)
+	note.tags << tags
+	note.user.tags << tags
+end
+

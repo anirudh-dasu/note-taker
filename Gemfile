@@ -46,6 +46,11 @@ gem 'redis-rails'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+#Gems to populate test data in db
+gem 'faker'
+gem 'populator', :github => 'norikt/populator'
+gem 'uuid'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'airborne'
@@ -66,7 +71,6 @@ group :development do
 end
 
 group :test do
-  gem 'faker'
   gem 'fuubar'
   gem 'shoulda-matchers'
 end

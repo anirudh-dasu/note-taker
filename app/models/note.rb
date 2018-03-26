@@ -29,6 +29,7 @@ class Note < ApplicationRecord
   scope :latest, -> { order(updated_at: :desc) }
   scope :tag_slug, ->(tag_slug) { joins(:tags).where(tags: { slug: tag_slug }) }
   scope :tag_id, ->(tag_id) { joins(:tags).where(tags: { id: tag_id }) }
+  scope :with_tags, -> {includes(:tags)}
 
   def self.paginate(offset)
     offset(offset).limit(paginates_per)

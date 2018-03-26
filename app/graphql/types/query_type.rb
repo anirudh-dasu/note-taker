@@ -11,7 +11,7 @@ Types::QueryType = GraphQL::ObjectType.define do
     argument :keyword, types.String, default_value: ''
     resolve lambda { |_object, args, ctx|
       user = ctx[:current_user]
-      user.notes.latest.tag_slug(args[:tag]).paginate(args[:offset])
+      args[:tag].empty? ? user.notes.with_tags.latest.paginate(args[:offset]) : user.notes.with_tags.latest.tag_slug(args[:tag]).paginate(args[:offset])
     }
   end
 
