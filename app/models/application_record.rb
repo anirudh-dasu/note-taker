@@ -4,7 +4,6 @@ class ApplicationRecord < ActiveRecord::Base
   alias_attribute :createdAt, :created_at
   alias_attribute :updatedAt, :updated_at
 
-
   def fields_errors
     field_errors = []
     errors.each do |attr, msg|

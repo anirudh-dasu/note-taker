@@ -49,9 +49,9 @@ gem 'redis-rails'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
-#Gems to populate test data in db
+# Gems to populate test data in db
 gem 'faker'
-gem 'populator', :github => 'norikt/populator'
+gem 'populator', github: 'norikt/populator'
 gem 'uuid'
 
 group :development, :test do

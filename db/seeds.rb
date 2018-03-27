@@ -9,33 +9,32 @@
 [User, UserDevice, Note, Tag].each(&:delete_all)
 
 User.populate(5) do |user|
-	user.email = Faker::Internet.email
-	user.username = Faker::Name.name
-	user.password_digest = User.new(password: 'password').password_digest
+  user.email = Faker::Internet.email
+  user.username = Faker::Name.name
+  user.password_digest = User.new(password: 'password').password_digest
 
   Note.populate(10) do |note|
-    note.title =  Faker::Movie.quote
+    note.title = Faker::Movie.quote
     note.content = Populator.sentences(5)
     note.kind = Faker::Color.color_name
 
-		Tag.populate(10) do |tag|
-			tag.title = Faker::LordOfTheRings.character
-		end
-	end
+    Tag.populate(10) do |tag|
+      tag.title = Faker::LordOfTheRings.character
+    end
+  end
 
 end
 
 User.all.each do |user|
-  device = UserDevice.create(device_type:'chrome', device_id: UUID.new.generate, user_id: user.id)
+  device = UserDevice.create(device_type: 'chrome', device_id: UUID.new.generate, user_id: user.id)
   device.generate_jwt_token!
   device.save
 end
 
 Note.all.each do |note|
-	note.user_id = User.order("RANDOM()").first.id
-	note.save
-	tags = Tag.order("RANDOM()").limit(5)
-	note.tags << tags
-	note.user.tags << tags
+  note.user_id = User.order("RANDOM()").first.id
+  note.save
+  tags = Tag.order("RANDOM()").limit(5)
+  note.tags << tags
+  note.user.tags << tags
 end
-
