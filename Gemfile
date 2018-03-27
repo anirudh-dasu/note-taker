@@ -11,7 +11,10 @@ gem 'rails', '~> 5.1.5'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Unicorn as the app server
-gem 'unicorn-rails'
+# gem 'unicorn-rails'
+
+# Use puma as the app server
+gem 'puma'
 
 # Use graphql instead of rest
 gem 'graphql'

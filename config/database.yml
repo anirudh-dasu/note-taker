@@ -82,6 +82,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: notetaker_production
   username: notetaker
   password: <%= ENV['NOTETAKER_DATABASE_PASSWORD'] %>

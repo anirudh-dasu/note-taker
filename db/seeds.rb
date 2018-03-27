@@ -8,7 +8,7 @@
 
 [User, UserDevice, Note, Tag].each(&:delete_all)
 
-User.populate(100) do |user|
+User.populate(5) do |user|
 	user.email = Faker::Internet.email
 	user.username = Faker::Name.name
 	user.password_digest = User.new(password: 'password').password_digest

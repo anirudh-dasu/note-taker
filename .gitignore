@@ -67,5 +67,3 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
-# Ignore application configuration
-/config/application.yml
